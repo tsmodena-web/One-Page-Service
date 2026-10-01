@@ -1,203 +1,318 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MODENA Service</title>
+  <meta name="description" content="MODENA Service - customer care, service center, product support, manuals and FAQ.">
+  <title>MODENA Service | Customer Care</title>
 
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap 5 + Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
-    :root { --modena:#f5a800; --dark:#171717; }
-    body { color:#222; font-family:Arial,Helvetica,sans-serif; }
+    :root {
+      --modena: #f5a800;
+      --modena-dark: #d99000;
+      --black: #171717;
+      --muted: #6b6b6b;
+      --soft: #f7f7f7;
+    }
+    html { scroll-behavior: smooth; }
+    body { color:#222; font-family: Arial, Helvetica, sans-serif; }
+    a { text-decoration:none; }
     .text-modena { color:var(--modena)!important; }
     .bg-modena { background:var(--modena)!important; }
     .btn-modena { background:var(--modena); border-color:var(--modena); color:#111; }
-    .btn-modena:hover { background:#d99100; border-color:#d99100; color:#111; }
+    .btn-modena:hover { background:var(--modena-dark); border-color:var(--modena-dark); color:#111; }
+
+    /* Top utility bar */
+    .topbar { background:#111; color:#ddd; font-size:.82rem; }
+    .topbar a { color:#fff; }
+    .topbar a:hover { color:var(--modena); }
+
+    /* Navbar */
+    .navbar-brand { letter-spacing:1px; }
+    .navbar .nav-link { color:#222; font-size:.92rem; }
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active { color:var(--modena-dark); }
+
+    /* Hero */
     .hero {
-      min-height:70vh;
-      background:linear-gradient(120deg,#f5a800,#ffbd18 55%,#e79b00);
-      position:relative; overflow:hidden;
+      min-height:510px;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(110deg, rgba(245,168,0,.98), rgba(245,168,0,.88)),
+        url("https://cdn.modena.com/media/wysiwyg/support-main-page/image.png") center/cover;
     }
     .hero:after {
-      content:""; position:absolute; inset:-20%;
-      background:repeating-linear-gradient(120deg,transparent 0 90px,rgba(255,255,255,.08) 90px 180px);
-      transform:rotate(-8deg);
+      content:"";
+      position:absolute;
+      width:70%;
+      height:150%;
+      right:-18%;
+      top:-25%;
+      background:rgba(255,255,255,.08);
+      transform:rotate(28deg);
     }
-    .hero > .container { position:relative; z-index:1; }
-    .section-title { font-weight:800; }
-    .service-card {
-      border:0; border-radius:18px; height:100%;
-      box-shadow:0 8px 25px rgba(0,0,0,.07);
+    .hero-content { position:relative; z-index:1; }
+    .hero h1 { font-weight:800; letter-spacing:-1px; }
+    .hero-search .form-control { min-height:56px; border:0; }
+    .hero-search .btn { min-width:125px; }
+
+    /* General */
+    .section-pad { padding:80px 0; }
+    .section-title { font-weight:800; letter-spacing:-.5px; }
+    .section-subtitle { color:var(--muted); max-width:700px; margin:auto; }
+    .eyebrow {
+      display:inline-block;
+      padding:.35rem .75rem;
+      background:#fff3d1;
+      color:#9b6800;
+      border-radius:999px;
+      font-size:.76rem;
+      font-weight:700;
+      letter-spacing:.5px;
+    }
+
+    /* Support cards */
+    .support-card {
+      border:0;
+      border-radius:18px;
+      overflow:hidden;
+      height:100%;
+      box-shadow:0 8px 25px rgba(0,0,0,.06);
+      transition:.2s ease;
+    }
+    .support-card:hover {
+      transform:translateY(-5px);
+      box-shadow:0 15px 35px rgba(0,0,0,.11);
+    }
+    .support-icon {
+      width:58px;
+      height:58px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:#fff3d1;
+      color:#bd7e00;
+      font-size:25px;
+    }
+    .support-card img {
+      width:100%;
+      height:155px;
+      object-fit:cover;
+    }
+
+    /* Quick action */
+    .quick-action {
+      margin-top:-35px;
+      position:relative;
+      z-index:3;
+    }
+    .quick-card {
+      border:0;
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+
+    /* Service journey */
+    .journey-card {
+      border:1px solid #eee;
+      border-radius:18px;
+      padding:28px 20px;
+      height:100%;
+      background:#fff;
       transition:.2s;
     }
-    .service-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,.12); }
-    .icon-box {
-      width:52px;height:52px;border-radius:14px;
-      display:grid;place-items:center;background:#fff3d1;
-      color:#e49b00;font-size:24px;
+    .journey-card:hover { border-color:#f2c15a; }
+    .journey-number {
+      width:40px;height:40px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--modena); font-weight:800;
+      margin-bottom:18px;
     }
-    .journey-step { position:relative; }
-    .journey-step:not(:last-child):after {
-      content:""; position:absolute; right:-20px; top:28px;
-      width:40px; border-top:2px dashed #ddd;
+
+    /* Trust */
+    .trust-section { background:#fafafa; }
+    .trust-img {
+      border-radius:22px;
+      width:100%;
+      height:100%;
+      min-height:390px;
+      object-fit:cover;
     }
-    .banner {
-      border-radius:24px; overflow:hidden;
-      background:linear-gradient(110deg,#fff3cf,#fff);
+    .trust-list li { margin-bottom:18px; }
+    .trust-list i { color:var(--modena-dark); font-size:1.3rem; margin-right:10px; }
+
+    /* Genuine parts */
+    .parts-banner {
+      background:#111;
+      color:#fff;
+      border-radius:24px;
+      overflow:hidden;
     }
-    .faq .accordion-button:not(.collapsed) { color:#111; background:#fff3d1; }
-    footer { background:var(--dark); color:#bbb; }
-    footer a { color:#bbb; text-decoration:none; }
+    .parts-banner img {
+      width:100%;
+      height:100%;
+      min-height:300px;
+      object-fit:cover;
+    }
+
+    /* Manuals */
+    .manual-card {
+      border:0;
+      border-radius:18px;
+      background:#fff;
+      box-shadow:0 8px 25px rgba(0,0,0,.06);
+      height:100%;
+    }
+
+    /* FAQ */
+    .faq-search {
+      max-width:760px;
+      margin:0 auto 28px;
+    }
+    .faq-category .btn {
+      border-radius:999px;
+      margin:3px;
+    }
+    .faq-item.hidden { display:none; }
+    .accordion-button:not(.collapsed) {
+      background:#fff3d1;
+      color:#111;
+      box-shadow:none;
+    }
+    .accordion-button:focus { box-shadow:none; }
+
+    /* Footer */
+    footer { background:#171717; color:#aaa; }
+    footer a { color:#aaa; }
     footer a:hover { color:#fff; }
-    @media(max-width:991px){
-      .journey-step:not(:last-child):after { display:none; }
+    .footer-title { color:#fff; font-weight:700; }
+
+    /* Floating actions */
+    .floating-actions {
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:1040;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .floating-actions a {
+      width:50px;height:50px;border-radius:50%;
+      display:grid;place-items:center;
+      color:#111;
+      box-shadow:0 5px 20px rgba(0,0,0,.2);
+    }
+    .float-call { background:var(--modena); }
+    .float-wa { background:#25d366; color:#fff!important; }
+
+    @media(max-width:767px){
+      .hero { min-height:590px; }
+      .hero h1 { font-size:2.35rem; }
+      .section-pad { padding:60px 0; }
+      .quick-action { margin-top:-20px; }
     }
   </style>
 </head>
 
 <body>
+
+<!-- TOP BAR -->
+<div class="topbar py-2">
+  <div class="container d-flex flex-wrap justify-content-between gap-2">
+    <span><i class="bi bi-clock me-1"></i> Customer Care: Mon–Fri 07.00–19.00 | Sat–Sun 07.00–17.00 WIB</span>
+    <span><a href="tel:1500715"><i class="bi bi-telephone me-1"></i>1500715</a></span>
+  </div>
+</div>
+
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">MODENA</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+<nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom">
+  <div class="container py-2">
+    <a class="navbar-brand fw-bold fs-4" href="#">MODENA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="nav" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
-        <li class="nav-item"><a class="nav-link" href="#journey">Service Journey</a></li>
-        <li class="nav-item"><a class="nav-link" href="#location">Service Location</a></li>
-        <li class="nav-item"><a class="nav-link" href="#products">Product Information</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contract">Contract Service</a></li>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="#support">Support</a></li>
+        <li class="nav-item"><a class="nav-link" href="#journey">Service</a></li>
+        <li class="nav-item"><a class="nav-link" href="#location">Service Center</a></li>
+        <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
         <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        <li class="nav-item ms-lg-2"><a class="btn btn-modena rounded-pill px-4" href="#contact">Contact Us</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- HERO / BANNER CC -->
-<header class="hero d-flex align-items-center">
-  <div class="container py-5">
-    <div class="row align-items-center">
+<!-- HERO -->
+<header class="hero">
+  <div class="container hero-content py-5">
+    <div class="row">
       <div class="col-lg-7 text-white">
-        <span class="badge bg-dark mb-3">MODENA CUSTOMER CARE</span>
-        <h1 class="display-4 fw-bold">One Page MODENA Service</h1>
+        <span class="badge bg-dark mb-3 px-3 py-2">MODENA CUSTOMER CARE</span>
+        <h1 class="display-4 mb-3">Find All the Help You Need</h1>
         <p class="lead mb-4">
-          Integrated service platform that simplifies the customer journey
-          by bringing service information and support into one page.
+          Dari panduan produk hingga solusi dari teknisi ahli.
+          Semua kebutuhan after-sales dalam satu halaman.
         </p>
-        <a href="#journey" class="btn btn-light btn-lg px-4">Explore Service <i class="bi bi-arrow-down"></i></a>
+
+        <form class="hero-search row g-2" onsubmit="searchFAQ(event)">
+          <div class="col-sm">
+            <input id="heroSearch" class="form-control form-control-lg rounded-pill px-4"
+                   placeholder="Cari pertanyaan, service, warranty...">
+          </div>
+          <div class="col-sm-auto">
+            <button class="btn btn-dark btn-lg rounded-pill px-4" type="submit">
+              <i class="bi bi-search me-1"></i> Search
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </header>
 
-<!-- CONTACT US -->
-<section id="contact" class="py-5">
+<!-- QUICK ACTIONS -->
+<section id="support" class="quick-action">
   <div class="container">
-    <div class="text-center mb-4">
-      <h2 class="section-title">Contact Us</h2>
-      <p class="text-secondary">Easy access to the right support channel.</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-3"><div class="card service-card p-4 text-center">
-        <div class="icon-box mx-auto mb-3"><i class="bi bi-telephone"></i></div>
-        <h5>Call Center</h5><p class="small text-secondary">Direct access to customer support.</p>
-        <a href="tel:1500075" class="btn btn-modena">Call Now</a>
-      </div></div>
-      <div class="col-md-3"><div class="card service-card p-4 text-center">
-        <div class="icon-box mx-auto mb-3"><i class="bi bi-chat-dots"></i></div>
-        <h5>Live Chat</h5><p class="small text-secondary">Get assistance through online support.</p>
-        <a href="#" class="btn btn-outline-dark">Open Chat</a>
-      </div></div>
-      <div class="col-md-3"><div class="card service-card p-4 text-center">
-        <div class="icon-box mx-auto mb-3"><i class="bi bi-whatsapp"></i></div>
-        <h5>WhatsApp</h5><p class="small text-secondary">Contact service support directly.</p>
-        <a href="#" class="btn btn-outline-dark">WhatsApp</a>
-      </div></div>
-      <div class="col-md-3"><div class="card service-card p-4 text-center">
-        <div class="icon-box mx-auto mb-3"><i class="bi bi-envelope"></i></div>
-        <h5>Email</h5><p class="small text-secondary">Send your inquiry or service request.</p>
-        <a href="mailto:customercare@modena.com" class="btn btn-outline-dark">Email Us</a>
-      </div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICE JOURNEY -->
-<section id="journey" class="py-5 bg-light">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title">Service Journey</h2>
-      <p class="text-secondary">A simple and seamless flow to access the required service.</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-lg-3 col-md-6 journey-step">
-        <div class="card service-card p-4">
-          <div class="icon-box mb-3"><i class="bi bi-tools"></i></div>
-          <h5>Request RON Installation</h5>
-          <p class="text-secondary small">Submit an installation request and access service support.</p>
-          <a href="#" class="text-dark fw-semibold">Select Request <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 journey-step">
-        <div class="card service-card p-4">
-          <div class="icon-box mb-3"><i class="bi bi-question-circle"></i></div>
-          <h5>FAQ & Manuals</h5>
-          <p class="text-secondary small">Find answers, manuals and product self-care information.</p>
-          <a href="#faq" class="text-dark fw-semibold">View FAQ <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 journey-step">
-        <div class="card service-card p-4">
-          <div class="icon-box mb-3"><i class="bi bi-headset"></i></div>
-          <h5>Request RON Service</h5>
-          <p class="text-secondary small">Create a service request for product assistance.</p>
-          <a href="#" class="text-dark fw-semibold">Select Request <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 journey-step">
-        <div class="card service-card p-4">
-          <div class="icon-box mb-3"><i class="bi bi-geo-alt"></i></div>
-          <h5>Tracking RON</h5>
-          <p class="text-secondary small">Check the latest status of your service request.</p>
-          <a href="#" class="text-dark fw-semibold">Track Now <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICE LOCATION -->
-<section id="location" class="py-5">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <h2 class="section-title">Service Location</h2>
-        <p class="text-secondary">
-          Easily find nearby MODENA stores and service center locations.
-        </p>
-        <div class="input-group mb-3">
-          <input class="form-control" placeholder="Search service center or location">
-          <button class="btn btn-modena"><i class="bi bi-search"></i></button>
-        </div>
-        <div class="card border-0 shadow-sm p-3 mb-3">
-          <strong>MODENA Home Center</strong>
-          <small class="text-secondary">Service Center Location</small>
-          <div class="mt-2"><i class="bi bi-telephone"></i> Contact service center</div>
-        </div>
-        <button class="btn btn-dark"><i class="bi bi-map"></i> Find Service Center</button>
-      </div>
-      <div class="col-lg-6">
-        <div class="ratio ratio-16x9 rounded-4 overflow-hidden bg-light d-flex align-items-center justify-content-center">
-          <div class="text-center text-secondary">
-            <i class="bi bi-map fs-1"></i>
-            <p class="mb-0">Map Location</p>
-            <small>Connect your preferred map provider here.</small>
+    <div class="card quick-card">
+      <div class="card-body p-4">
+        <div class="row g-3 text-center">
+          <div class="col-6 col-lg-3">
+            <a href="#journey" class="d-block text-dark">
+              <i class="bi bi-wrench-adjustable-circle fs-2 text-modena"></i>
+              <div class="fw-bold mt-2">Service</div>
+              <small class="text-secondary">Book & track service</small>
+            </a>
+          </div>
+          <div class="col-6 col-lg-3">
+            <a href="#location" class="d-block text-dark">
+              <i class="bi bi-geo-alt fs-2 text-modena"></i>
+              <div class="fw-bold mt-2">Service Center</div>
+              <small class="text-secondary">Find nearest location</small>
+            </a>
+          </div>
+          <div class="col-6 col-lg-3">
+            <a href="https://ciao.modena.com/" target="_blank" class="d-block text-dark">
+              <i class="bi bi-person-plus fs-2 text-modena"></i>
+              <div class="fw-bold mt-2">Product Registration</div>
+              <small class="text-secondary">Register your product</small>
+            </a>
+          </div>
+          <div class="col-6 col-lg-3">
+            <a href="#faq" class="d-block text-dark">
+              <i class="bi bi-question-circle fs-2 text-modena"></i>
+              <div class="fw-bold mt-2">FAQ</div>
+              <small class="text-secondary">Find quick answers</small>
+            </a>
           </div>
         </div>
       </div>
@@ -205,72 +320,246 @@
   </div>
 </section>
 
-<!-- PRODUCT INFORMATION -->
-<section id="products" class="py-5 bg-light">
+<!-- SUPPORT CARDS -->
+<section class="section-pad">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="section-title">Product Information</h2>
-      <p class="text-secondary">Product details, specifications, manuals and related information.</p>
+      <span class="eyebrow">CUSTOMER SUPPORT</span>
+      <h2 class="section-title mt-3">Choose the Support You Need</h2>
+      <p class="section-subtitle">
+        Akses layanan utama seperti Call Center, Online Support, Service Center,
+        Product Registration, Trade-In dan FAQ.
+      </p>
     </div>
-    <div class="row g-4">
-      <div class="col-md-4"><div class="card service-card overflow-hidden">
-        <div class="p-5 bg-white text-center"><i class="bi bi-book fs-1 text-modena"></i></div>
-        <div class="card-body"><h5>Manual Book</h5><p class="text-secondary">Access product manuals and usage information.</p><a href="#" class="btn btn-modena">See More</a></div>
-      </div></div>
-      <div class="col-md-4"><div class="card service-card overflow-hidden">
-        <div class="p-5 bg-white text-center"><i class="bi bi-file-earmark-text fs-1 text-modena"></i></div>
-        <div class="card-body"><h5>Brochure</h5><p class="text-secondary">Explore product specifications and features.</p><a href="#" class="btn btn-modena">See More</a></div>
-      </div></div>
-      <div class="col-md-4"><div class="card service-card overflow-hidden">
-        <div class="p-5 bg-white text-center"><i class="bi bi-play-circle fs-1 text-modena"></i></div>
-        <div class="card-body"><h5>Video Tutorial</h5><p class="text-secondary">Learn how to use and self-care your product.</p><a href="#" class="btn btn-modena">Watch Video</a></div>
-      </div></div>
-    </div>
-  </div>
-</section>
 
-<!-- CUSTOMER CARE CAMPAIGN -->
-<section class="py-5">
-  <div class="container">
-    <div class="banner p-4 p-lg-5 shadow-sm">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-8">
-          <span class="badge bg-modena text-dark mb-2">CUSTOMER CARE CAMPAIGN</span>
-          <h2 class="section-title">MODENA Genuine Parts</h2>
-          <p class="text-secondary mb-0">
-            Customer Care banners provide a direct and visible communication
-            channel for service information, promotions and campaigns.
-          </p>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="card support-card p-4">
+          <div class="support-icon mb-3"><i class="bi bi-telephone"></i></div>
+          <h5>Call Center</h5>
+          <p class="text-secondary small">Hubungi MODENA untuk bantuan dan konsultasi.</p>
+          <div class="small text-secondary mb-3">07.00–19.00 WIB weekdays<br>07.00–17.00 WIB weekend</div>
+          <a href="tel:1500715" class="btn btn-modena w-100 rounded-pill">Call 1500715</a>
         </div>
-        <div class="col-lg-4 text-lg-end">
-          <a href="#" class="btn btn-dark btn-lg">Learn More</a>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card support-card p-4">
+          <div class="support-icon mb-3"><i class="bi bi-chat-dots"></i></div>
+          <h5>Online Support</h5>
+          <p class="text-secondary small">Live Chat, WhatsApp dan Email untuk bantuan cepat.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="https://mona.modena.com/" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill">Live Chat</a>
+            <a href="https://wa.me/6281511500715" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card support-card">
+          <img src="https://cdn.modena.com/media/wysiwyg/support-main-page/Service_center.png" alt="MODENA Service Center">
+          <div class="card-body p-4">
+            <h5>Service Center</h5>
+            <p class="text-secondary small">Repair, maintenance dan expert service di lokasi resmi.</p>
+            <a href="https://www.modena.com/id_id/support-service-center" target="_blank" class="btn btn-modena w-100 rounded-pill">Find Service Center</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card support-card p-4">
+          <div class="support-icon mb-3"><i class="bi bi-box-seam"></i></div>
+          <h5>Product Registration</h5>
+          <p class="text-secondary small">Daftarkan produk untuk mendapatkan benefit dan warranty-related services.</p>
+          <a href="https://ciao.modena.com/" target="_blank" class="btn btn-outline-dark w-100 rounded-pill">Register Product</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card support-card p-4">
+          <div class="support-icon mb-3"><i class="bi bi-arrow-repeat"></i></div>
+          <h5>Trade-In</h5>
+          <p class="text-secondary small">Upgrade produk lama Anda melalui program trade-in MODENA.</p>
+          <a href="https://www.modena.com/id_en/trade-in" target="_blank" class="btn btn-outline-dark rounded-pill">Explore Trade-In</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card support-card p-4">
+          <div class="support-icon mb-3"><i class="bi bi-gift"></i></div>
+          <h5>MODENA Care+</h5>
+          <p class="text-secondary small">Program benefit dengan extended warranty, priority service dan exclusive offers.</p>
+          <a href="#" class="btn btn-outline-dark rounded-pill">See More</a>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4">
+        <div class="card support-card p-4">
+          <div class="support-icon mb-3"><i class="bi bi-question-circle"></i></div>
+          <h5>FAQ</h5>
+          <p class="text-secondary small">Cari jawaban tentang service, warranty, order, shipping dan product support.</p>
+          <a href="#faq" class="btn btn-outline-dark rounded-pill">Browse FAQ</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTRACT SERVICE -->
-<section id="contract" class="py-5 bg-light">
+<!-- SERVICE JOURNEY -->
+<section id="journey" class="section-pad bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">SERVICE JOURNEY</span>
+      <h2 class="section-title mt-3">Book & Track Your Service Easily</h2>
+      <p class="section-subtitle">Buat appointment, cek status dan temukan service center dengan alur yang lebih sederhana.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="journey-card">
+          <div class="journey-number">1</div>
+          <h5>Service Appointment</h5>
+          <p class="text-secondary small">Schedule a service visit sesuai kebutuhan Anda.</p>
+          <a href="https://www.modena.com/id_en/service-appointment" target="_blank" class="btn btn-modena rounded-pill">Schedule Now</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="journey-card">
+          <div class="journey-number">2</div>
+          <h5>Track Status</h5>
+          <p class="text-secondary small">Pantau proses service menggunakan nomor RON.</p>
+          <a href="https://www.modena.com/id_en/check-service-status" target="_blank" class="btn btn-outline-dark rounded-pill">Track Status</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="journey-card">
+          <div class="journey-number">3</div>
+          <h5>Find Service Center</h5>
+          <p class="text-secondary small">Temukan authorized service center terdekat.</p>
+          <a href="#location" class="btn btn-outline-dark rounded-pill">Find Near Me</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location" class="section-pad">
   <div class="container">
     <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <span class="badge bg-modena text-dark mb-2">CONTRACT SERVICE</span>
-        <h2 class="section-title">Service Contract Plan</h2>
+      <div class="col-lg-6">
+        <span class="eyebrow">SERVICE LOCATION</span>
+        <h2 class="section-title mt-3">Find the Nearest Service Center</h2>
         <p class="text-secondary">
-          Access service contract information, coverage, related benefits and registration.
+          MODENA menyediakan jaringan service center resmi di berbagai wilayah.
+          Cari berdasarkan kota atau provinsi.
         </p>
-        <div class="row g-3">
-          <div class="col-md-6"><div class="card service-card p-4"><i class="bi bi-lightning-charge fs-2 text-modena"></i><h5 class="mt-3">Faster Response</h5><p class="small text-secondary mb-0">Support designed for faster service response.</p></div></div>
-          <div class="col-md-6"><div class="card service-card p-4"><i class="bi bi-person-check fs-2 text-modena"></i><h5 class="mt-3">Member Benefits</h5><p class="small text-secondary mb-0">Access benefits available through the service plan.</p></div></div>
+
+        <div class="input-group input-group-lg mb-3">
+          <input id="locationInput" class="form-control" placeholder="Contoh: Jakarta, Bandung, Surabaya">
+          <button class="btn btn-modena" onclick="findLocation()"><i class="bi bi-search"></i></button>
         </div>
-        <a href="#" class="btn btn-modena mt-4">Register Contract Service</a>
+        <div id="locationResult" class="alert alert-light border d-none"></div>
+
+        <a href="https://www.modena.com/id_id/support-service-center" target="_blank" class="btn btn-dark rounded-pill">
+          Open Official Service Center <i class="bi bi-box-arrow-up-right ms-1"></i>
+        </a>
       </div>
-      <div class="col-lg-5">
-        <div class="rounded-4 bg-white shadow-sm p-5 text-center">
-          <i class="bi bi-shield-check display-3 text-modena"></i>
-          <h4 class="mt-3">Service Protection</h4>
-          <p class="text-secondary">Coverage and service support in one program.</p>
+
+      <div class="col-lg-6">
+        <div class="rounded-4 overflow-hidden shadow-sm">
+          <iframe
+            title="MODENA Service Center Map"
+            src="https://www.google.com/maps?q=MODENA%20Service%20Center%20Jakarta&output=embed"
+            width="100%" height="360" style="border:0;" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / OFFICIAL SERVICE -->
+<section class="section-pad trust-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <img class="trust-img" src="https://cdn.modena.com/media/wysiwyg/support-main-page/image.png"
+             alt="MODENA expert service">
+      </div>
+      <div class="col-lg-6">
+        <span class="eyebrow">STAY SAFE, STAY OFFICIAL</span>
+        <h2 class="section-title mt-3">Official Service. Trusted Technicians.</h2>
+        <p class="text-secondary">
+          Terapkan konsep trust-building dari website MODENA: customer diarahkan
+          untuk request melalui channel resmi dan memastikan teknisi serta spare part
+          yang digunakan adalah resmi.
+        </p>
+        <ul class="list-unstyled trust-list mt-4">
+          <li><i class="bi bi-check-circle-fill"></i><strong>Request with Confidence</strong><br><span class="ms-4 text-secondary small">Request service melalui website resmi dan dapatkan konfirmasi.</span></li>
+          <li><i class="bi bi-check-circle-fill"></i><strong>Trusted Technicians</strong><br><span class="ms-4 text-secondary small">Teknisi menggunakan seragam resmi dan telah mendapatkan training.</span></li>
+          <li><i class="bi bi-check-circle-fill"></i><strong>100% Genuine Spare Parts</strong><br><span class="ms-4 text-secondary small">Gunakan spare part asli untuk menjaga performa dan keamanan produk.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENUINE PARTS -->
+<section class="section-pad">
+  <div class="container">
+    <div class="parts-banner">
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-6 p-5">
+          <span class="eyebrow">MODENA GENUINE PARTS</span>
+          <h2 class="fw-bold mt-3">Original Parts. Official Warranty.</h2>
+          <p class="text-white-50">
+            Perbaikan resmi MODENA menggunakan genuine spare parts dan didukung
+            warranty coverage sesuai ketentuan yang berlaku.
+          </p>
+          <a href="#" class="btn btn-modena rounded-pill">Explore Genuine Parts</a>
+        </div>
+        <div class="col-lg-6">
+          <img src="https://cdn.modena.com/media/wysiwyg/support-main-page/Modena_Genuine_Parts_1.png"
+               alt="MODENA Genuine Parts">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT INFORMATION -->
+<section id="products" class="section-pad bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">MANUALS & TUTORIALS</span>
+      <h2 class="section-title mt-3">Product Information</h2>
+      <p class="section-subtitle">Manual Book, Brochure dan Video Tutorial untuk membantu customer melakukan self-service.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card manual-card p-4 text-center">
+          <div class="support-icon mx-auto mb-3"><i class="bi bi-book"></i></div>
+          <h5>Manual Book</h5>
+          <p class="text-secondary small">Cari dan download manual produk MODENA.</p>
+          <a href="https://www.modena.com/id_en/manual-book" target="_blank" class="btn btn-modena rounded-pill">See More</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card manual-card p-4 text-center">
+          <div class="support-icon mx-auto mb-3"><i class="bi bi-file-earmark-text"></i></div>
+          <h5>Brochure</h5>
+          <p class="text-secondary small">Lihat informasi produk dan spesifikasi.</p>
+          <a href="#" class="btn btn-outline-dark rounded-pill">See More</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card manual-card p-4 text-center">
+          <div class="support-icon mx-auto mb-3"><i class="bi bi-play-circle"></i></div>
+          <h5>Video Tutorial</h5>
+          <p class="text-secondary small">Pelajari penggunaan dan perawatan produk.</p>
+          <a href="#" class="btn btn-outline-dark rounded-pill">Watch Video</a>
         </div>
       </div>
     </div>
@@ -278,17 +567,117 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="py-5 faq">
+<section id="faq" class="section-pad">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <p class="text-secondary">Quick answers for common questions and service-related information.</p>
+    <div class="text-center mb-4">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-title mt-3">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Cari jawaban cepat tentang service, warranty, product dan after-sales.</p>
     </div>
+
+    <div class="faq-search">
+      <div class="input-group input-group-lg">
+        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+        <input id="faqSearch" class="form-control" placeholder="Search FAQ..." oninput="filterFAQ()">
+      </div>
+    </div>
+
+    <div class="faq-category text-center mb-4">
+      <button class="btn btn-dark btn-sm" onclick="filterCategory('all', this)">All</button>
+      <button class="btn btn-outline-dark btn-sm" onclick="filterCategory('service', this)">Service</button>
+      <button class="btn btn-outline-dark btn-sm" onclick="filterCategory('warranty', this)">Warranty</button>
+      <button class="btn btn-outline-dark btn-sm" onclick="filterCategory('product', this)">Product</button>
+      <button class="btn btn-outline-dark btn-sm" onclick="filterCategory('payment', this)">Payment</button>
+    </div>
+
     <div class="accordion mx-auto" id="faqList" style="max-width:900px">
-      <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#f1">Where can I request MODENA service?</button></h2><div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faqList"><div class="accordion-body">Use the Service Journey above to submit an installation or service request.</div></div></div>
-      <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f2">How can I track my service request?</button></h2><div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqList"><div class="accordion-body">Select Tracking RON to check your latest service request status.</div></div></div>
-      <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f3">Where can I find the product manual?</button></h2><div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqList"><div class="accordion-body">Open Product Information and select Manual Book.</div></div></div>
-      <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f4">How do I find the nearest service center?</button></h2><div id="f4" class="accordion-collapse collapse" data-bs-parent="#faqList"><div class="accordion-body">Use the Service Location section and search for the required area.</div></div></div>
+      <div class="faq-item" data-category="service" data-keywords="service support customer care">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#faq1">Where to get MODENA care support?</button></h2>
+          <div id="faq1" class="accordion-collapse collapse show"><div class="accordion-body">
+            Hubungi MODENA melalui website resmi, Contact Center, Email, WhatsApp dan channel support resmi.
+          </div></div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="service" data-keywords="after sales repair maintenance cleaning">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">After purchasing MODENA product, what after-sales service is provided?</button></h2>
+          <div id="faq2" class="accordion-collapse collapse"><div class="accordion-body">
+            Selain repair service, tersedia maintenance service termasuk cleaning unit sesuai layanan yang berlaku.
+          </div></div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="service" data-keywords="carry in in home technician service support">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">How do I reach MODENA Service Support?</button></h2>
+          <div id="faq3" class="accordion-collapse collapse"><div class="accordion-body">
+            MODENA menyediakan Carry-In Service untuk unit portable tertentu dan In-Home Service untuk kunjungan teknisi.
+          </div></div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="warranty" data-keywords="warranty guarantee claim garansi">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq4">How do I claim product warranty?</button></h2>
+          <div id="faq4" class="accordion-collapse collapse"><div class="accordion-body">
+            Customer perlu menyiapkan warranty receipt/proof of purchase dan memenuhi ketentuan warranty yang berlaku.
+          </div></div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="warranty" data-keywords="warranty duration spare parts repair">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq5">How long is the product warranty?</button></h2>
+          <div id="faq5" class="accordion-collapse collapse"><div class="accordion-body">
+            Website MODENA saat ini menjelaskan full warranty dan partial/parts warranty dengan periode yang dapat berbeda sesuai produk/spare part. Detail mengikuti warranty card dan ketentuan resmi.
+          </div></div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="product" data-keywords="problem product broken damaged">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq6">When I have problems with the product, what should I do?</button></h2>
+          <div id="faq6" class="accordion-collapse collapse"><div class="accordion-body">
+            Hubungi customer care untuk konsultasi online sebelum penjadwalan teknisi.
+          </div></div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="product" data-keywords="manual installation hob water heater washing machine">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq7">What information is available for product installation?</button></h2>
+          <div id="faq7" class="accordion-collapse collapse"><div class="accordion-body">
+            FAQ resmi MODENA menyediakan panduan kebutuhan instalasi untuk beberapa produk seperti hob, electric water heater dan washing machine.
+          </div></div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="payment" data-keywords="payment virtual wallet repair payment">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq8">How to pay for product repair?</button></h2>
+          <div id="faq8" class="accordion-collapse collapse"><div class="accordion-body">
+            Website MODENA menyebutkan digital payment menggunakan virtual wallet untuk pembayaran repair.
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section id="contact" class="py-5 bg-modena">
+  <div class="container py-4">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h2 class="fw-bold">Need Help?</h2>
+        <p class="mb-0">Customer Care MODENA siap membantu pertanyaan dan kebutuhan service Anda.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a href="tel:1500715" class="btn btn-dark btn-lg rounded-pill me-2"><i class="bi bi-telephone me-1"></i>1500715</a>
+        <a href="https://wa.me/6281511500715" target="_blank" class="btn btn-light btn-lg rounded-pill"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
@@ -298,21 +687,101 @@
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-4">
-        <h4 class="text-white fw-bold">MODENA</h4>
-        <p>One Page Service — integrated customer support and service information platform.</p>
+        <h4 class="footer-title">MODENA</h4>
+        <p>One Page Service — customer support, service request, product information and after-sales support.</p>
       </div>
-      <div class="col-6 col-lg-2"><h6 class="text-white">Company</h6><a href="#">About</a><br><a href="#">Career</a></div>
-      <div class="col-6 col-lg-2"><h6 class="text-white">Products</h6><a href="#products">Product Info</a><br><a href="#">Store</a></div>
-      <div class="col-6 col-lg-2"><h6 class="text-white">Support</h6><a href="#contact">Contact</a><br><a href="#faq">FAQ</a></div>
-      <div class="col-6 col-lg-2"><h6 class="text-white">Programs</h6><a href="#contract">Contract Service</a><br><a href="#">Service Center</a></div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-title mb-3">Products</div>
+        <a href="#">Home</a><br>
+        <a href="#">Professionals</a><br>
+        <a href="#">Seamless IoT</a><br>
+        <a href="#">Energy</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-title mb-3">Support</div>
+        <a href="#contact">Contact Us</a><br>
+        <a href="#location">Service Center</a><br>
+        <a href="https://ciao.modena.com/" target="_blank">Product Registration</a><br>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-title mb-3">Programs</div>
+        <a href="#">Trade-In</a><br>
+        <a href="#contract">Contract Service</a><br>
+        <a href="#">Promotion</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-title mb-3">Information</div>
+        <a href="#">Privacy Policy</a><br>
+        <a href="#">Cookie Policy</a><br>
+        <a href="#">Terms & Conditions</a>
+      </div>
     </div>
     <hr class="border-secondary my-4">
-    <div class="d-flex flex-column flex-md-row justify-content-between small">
-      <span>© MODENA. All Rights Reserved.</span>
-      <span>modena.com</span>
+    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 small">
+      <span>© 2026 MODENA. All Rights Reserved.</span>
+      <span>Indonesia</span>
     </div>
   </div>
 </footer>
+
+<!-- FLOATING CONTACT -->
+<div class="floating-actions">
+  <a class="float-call" href="tel:1500715" title="Call MODENA"><i class="bi bi-telephone-fill"></i></a>
+  <a class="float-wa" href="https://wa.me/6281511500715" target="_blank" title="WhatsApp MODENA"><i class="bi bi-whatsapp"></i></a>
+</div>
+
+<script>
+  let currentCategory = "all";
+
+  function filterFAQ() {
+    const query = document.getElementById("faqSearch").value.toLowerCase().trim();
+    document.querySelectorAll(".faq-item").forEach(item => {
+      const text = item.innerText.toLowerCase() + " " + (item.dataset.keywords || "");
+      const categoryOK = currentCategory === "all" || item.dataset.category === currentCategory;
+      item.classList.toggle("hidden", !(categoryOK && text.includes(query)));
+    });
+  }
+
+  function filterCategory(category, btn) {
+    currentCategory = category;
+    document.querySelectorAll(".faq-category .btn").forEach(b => {
+      b.classList.remove("btn-dark");
+      b.classList.add("btn-outline-dark");
+    });
+    btn.classList.remove("btn-outline-dark");
+    btn.classList.add("btn-dark");
+    filterFAQ();
+  }
+
+  function searchFAQ(event) {
+    event.preventDefault();
+    const query = document.getElementById("heroSearch").value.trim();
+    document.getElementById("faqSearch").value = query;
+    document.getElementById("faq").scrollIntoView({behavior:"smooth"});
+    filterFAQ();
+  }
+
+  function findLocation() {
+    const value = document.getElementById("locationInput").value.trim();
+    const result = document.getElementById("locationResult");
+    if (!value) {
+      result.classList.remove("d-none");
+      result.innerHTML = '<i class="bi bi-info-circle me-2"></i>Masukkan kota atau provinsi terlebih dahulu.';
+      return;
+    }
+    result.classList.remove("d-none");
+    result.innerHTML = 'Searching service center for <strong>' + escapeHtml(value) +
+      '</strong>... <a target="_blank" href="https://www.google.com/maps/search/MODENA+Service+Center+' +
+      encodeURIComponent(value) + '">Open Google Maps <i class="bi bi-box-arrow-up-right"></i></a>';
+  }
+
+  function escapeHtml(value) {
+    return value.replace(/[&<>"']/g, c => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+    }[c]));
+  }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
